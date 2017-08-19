@@ -1,5 +1,7 @@
 package Aplicacio;
 
+import java.util.List;
+
 import Domini.Club;
 import Domini.Jugador;
 import Domini.Posicions;
@@ -34,7 +36,6 @@ public class ControlBBDD {
 
 	public void afegirJugador(String nom, String cognom1, String cognom2, String club, String posicio)
 			throws Exception {
-		Club cluba = new Club(club);
 		Posicions a = null;
 		switch (posicio) {
 
@@ -53,8 +54,22 @@ public class ControlBBDD {
 			break;
 
 		}
-		Jugador jugador = new Jugador(nom, cognom1, cognom2, cluba, a, 0, 0, 0);
+		Jugador jugador = new Jugador(nom, cognom1, cognom2, club, a, 0, 0, 0);
 		FacanaBBDD.getInstance().afegirJugador(jugador);
+
+	}
+
+	public String[] getJugadorsDeEquip(String nomClub) throws Exception {
+		List<Jugador> jugador = FacanaBBDD.getInstance().recuperarJugador(nomClub);
+		String[] jugadors = new String[jugador.size()];
+
+		int contador = 0;
+		for (Jugador jug : jugador) {
+			jugadors[contador] = jug.toString();
+			contador++;
+		}
+
+		return jugadors;
 
 	}
 

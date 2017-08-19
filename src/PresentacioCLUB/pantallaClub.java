@@ -1,94 +1,88 @@
 package PresentacioCLUB;
 
+import java.awt.Dimension;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import Aplicacio.ControlBBDD;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
-public class pantallaClub extends JPanel {
-	private boolean DEBUG = false;
+public class pantallaClub {
 
-	public pantallaClub(String string) {
-		super(new GridLayout(1, 0));
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				createAndShowGUI();
-			}
-		});
-		initComponents();
-	}
+	private JFrame frame;
 
-	public void initComponents() {
-		String[] columnNames = { "First Name", "Last Name", "Sport", "# of Years", "Vegetarian" };
+	/**
+	 * Launch the application.
+	 */
 
-		Object[][] data = { { "Kathy", "Smith", "Snowboarding", new Integer(5), new Boolean(false) },
-				{ "John", "Doe", "Rowing", new Integer(3), new Boolean(true) },
-				{ "Sue", "Black", "Knitting", new Integer(2), new Boolean(false) },
-				{ "Jane", "White", "Speed reading", new Integer(20), new Boolean(true) },
-				{ "Joe", "Brown", "Pool", new Integer(10), new Boolean(false) } };
+	/**
+	 * Create the application.
+	 * 
+	 * @param string
+	 */
+	public pantallaClub(String string, ControlBBDD controlBBDD) {
 
-		final JTable table = new JTable(data, columnNames);
-		table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-		table.setFillsViewportHeight(true);
-
-		if (DEBUG) {
-			table.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-					printDebugData(table);
-				}
-			});
-		}
-
-		// Create the scroll pane and add the table to it.
-		JScrollPane scrollPane = new JScrollPane(table);
-
-		// Add the scroll pane to this panel.
-		add(scrollPane);
-	}
-
-	private void printDebugData(JTable table) {
-		int numRows = table.getRowCount();
-		int numCols = table.getColumnCount();
-		javax.swing.table.TableModel model = table.getModel();
-
-		System.out.println("Value of data: ");
-		for (int i = 0; i < numRows; i++) {
-			System.out.print("    row " + i + ":");
-			for (int j = 0; j < numCols; j++) {
-				System.out.print("  " + model.getValueAt(i, j));
-			}
-			System.out.println();
-		}
-		System.out.println("--------------------------");
+		initialize(string, controlBBDD);
 	}
 
 	/**
-	 * Create the GUI and show it. For thread safety, this method should be invoked
-	 * from the event-dispatching thread.
+	 * Initialize the contents of the frame.
+	 * 
+	 * @param string
+	 * @param controlBBDD
 	 */
-	private static void createAndShowGUI() {
-		// Create and set up the window.
-		JFrame frame = new JFrame("SimpleTableDemo");
+	private void initialize(String string, ControlBBDD controlBBDD) {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout
+				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGap(0, 434, Short.MAX_VALUE));
+		groupLayout
+				.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGap(0, 261, Short.MAX_VALUE));
+		frame.getContentPane().setLayout(groupLayout);
 
-		// Create and set up the content pane.
-		pantallaClub newContentPane = new pantallaClub(null);
-		newContentPane.setOpaque(true); // content panes must be opaque
-		frame.setContentPane(newContentPane);
+		String[] columnNames = { "Nom", "Cognom", "2n Cognom", "Equip", "Posicio", "T. Grogues", "T. Vermelles",
+				"Partits jugats" };
 
-		// Display the window.
-		frame.pack();
-		frame.setVisible(true);
+		try {
+			String[] jugadors = controlBBDD.getJugadorsDeEquip(string);
+			for (int i = 0; i < jugadors.length; i++) {
+				System.out.println(jugadors[i]);
+			}
+			int i = jugadors.length;
+
+			Object[][] data = new Object[jugadors.length][columnNames.length];
+
+			for (int i1 = 0; i1 < jugadors.length; i1++) {
+
+				String[] parts = jugadors[i1].split(",");
+
+				data[i1][0] = parts[0];
+				data[i1][1] = parts[1];
+				data[i1][2] = parts[2];
+				data[i1][3] = parts[3];
+				data[i1][4] = parts[4];
+				data[i1][5] = parts[5];
+				data[i1][6] = parts[6];
+				data[i1][7] = parts[7];
+
+			}
+
+			final JTable table = new JTable(data, columnNames);
+			table.setPreferredScrollableViewportSize(new Dimension(500, 70));
+			table.setFillsViewportHeight(true);
+			// Create the scroll pane and add the table to it.
+			JScrollPane scrollPane = new JScrollPane(table);
+
+			// Add the scroll pane to this panel.
+			frame.setContentPane(scrollPane);
+			frame.setVisible(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-//	public static void main(String[] args) {
-//		// Schedule a job for the event-dispatching thread:
-//		// creating and showing this application's GUI.
-//		pantallaClub nouva = new pantallaClub(null);
-//		nouva.setVisible(true);
-//	}
 }

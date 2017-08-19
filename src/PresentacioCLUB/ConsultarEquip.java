@@ -71,36 +71,21 @@ public class ConsultarEquip {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new pantallaClub(list.getSelectedValue().toString());
+				new pantallaClub(list.getSelectedValue().toString(), controlBBDD);
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(46)
-					.addComponent(lblEscullUnEquip)
-					.addContainerGap(21, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(106, Short.MAX_VALUE)
-					.addComponent(list, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
-					.addGap(73))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(215, Short.MAX_VALUE)
-					.addComponent(btnNewButton)
-					.addGap(197))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addGap(24)
-					.addComponent(lblEscullUnEquip)
-					.addGap(18)
-					.addComponent(list, GroupLayout.PREFERRED_SIZE, 362, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(btnNewButton)
-					.addContainerGap(29, Short.MAX_VALUE))
-		);
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addGap(46).addComponent(lblEscullUnEquip)
+						.addContainerGap(21, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addContainerGap(106, Short.MAX_VALUE)
+						.addComponent(list, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE).addGap(73))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup().addContainerGap(215, Short.MAX_VALUE)
+						.addComponent(btnNewButton).addGap(197)));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(Alignment.LEADING,
+				groupLayout.createSequentialGroup().addGap(24).addComponent(lblEscullUnEquip).addGap(18)
+						.addComponent(list, GroupLayout.PREFERRED_SIZE, 362, GroupLayout.PREFERRED_SIZE).addGap(18)
+						.addComponent(btnNewButton).addContainerGap(29, Short.MAX_VALUE)));
 		frame.getContentPane().setLayout(groupLayout);
 	}
 

@@ -10,13 +10,13 @@ public class Jugador {
 	public Jugador() {
 	}
 
-	public Jugador(String nom, String cognom1, String cognom2, Club club, Posicions posicio, int grogues, int vermelles,
-			int partitsJugats) {
+	public Jugador(String nom, String cognom1, String cognom2, String club, Posicions posicio, int grogues,
+			int vermelles, int partitsJugats) {
 		super();
 		this.nom = nom;
 		this.cognom1 = cognom1;
 		this.cognom2 = cognom2;
-		this.club = club;
+		this.club = new Club(club);
 		this.posicio = posicio;
 		this.grogues = grogues;
 		this.vermelles = vermelles;
@@ -85,6 +85,12 @@ public class Jugador {
 
 	public void setPartitsJugats(int vermelles) {
 		this.vermelles = vermelles;
+	}
+
+	@Override
+	public String toString() {
+		return nom + "," + cognom1 + "," + cognom2 + "," + club.getNomClub() + "," + posicio + "," + grogues + ","
+				+ vermelles + "," + partitsJugats;
 	}
 
 }

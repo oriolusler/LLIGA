@@ -3,8 +3,12 @@ package Persistencia;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import Domini.Club;
 import Domini.Jugador;
+import Domini.Posicions;
 
 class JugadorBBDD {
 
@@ -62,6 +66,53 @@ class JugadorBBDD {
 
 		return null;
 
+	}
+
+	public List<Jugador> recuperarJugadorDeClub(String nomClub) throws Exception {
+		List<Jugador> jugadorsEquips = new ArrayList<Jugador>();
+		PreparedStatement pst = null;
+		try {
+			String sql = "SELECT * FROM JUGADOR WHERE NOMCLUB = ?";
+			pst = ConnectionBBDD.getInstacia().prepareStatement(sql);
+			pst.clearParameters();
+			pst.setString(1, nomClub);
+			ResultSet rs = pst.executeQuery();
+
+			while (rs.next()) {
+
+				Posicions posicio = null;
+				switch (rs.getString(5)) {
+				case "POT":
+					posicio = Posicions.POT;
+					break;
+				case "DF":
+					posicio = Posicions.DF;
+					break;
+
+				case "MC":
+					posicio = Posicions.MC;
+					break;
+				case "DL":
+					posicio = Posicions.DL;
+					break;
+
+				}
+
+				Jugador nou = new Jugador(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+						posicio, rs.getInt(6), rs.getInt(7), rs.getInt(8));
+
+				jugadorsEquips.add(nou);
+			}
+			return jugadorsEquips;
+		} catch (SQLException e) {
+			throw new Exception("ERROR de SQL/JUGADORBBDD/getJugadorFromDB\n" + e.getMessage());
+		} catch (Exception e) {
+			throw new Exception("ERROR de CLASS/JUGADORBBDD/getJugadorFromDB\n" + e.getMessage());
+		} finally {
+			if (pst != null)
+				pst.close();
+			ConnectionBBDD.getInstacia().close();
+		}
 	}
 
 }

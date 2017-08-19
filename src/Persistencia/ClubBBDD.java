@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Domini.Club;
+import Domini.Jugador;
 
 class ClubBBDD {
 
@@ -65,10 +66,10 @@ class ClubBBDD {
 			pst = ConnectionBBDD.getInstacia().prepareStatement(sql);
 			pst.clearParameters();
 			ResultSet rs = pst.executeQuery();
-	
+
 			while (rs.next()) {
 				clubs.add(rs.getString(1));
-	
+
 			}
 			return clubs;
 		} catch (SQLException e) {
@@ -80,6 +81,6 @@ class ClubBBDD {
 				pst.close();
 			ConnectionBBDD.getInstacia().close();
 		}
-	}
-
+	}	
+	
 }

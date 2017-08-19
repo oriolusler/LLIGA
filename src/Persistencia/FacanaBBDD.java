@@ -64,5 +64,9 @@ public class FacanaBBDD {
 		}
 		return clubs;
 	}
+	
+	public List<Jugador> recuperarJugador(String nomEquip) throws Exception{
+		return jugadorBBDD.recuperarJugadorDeClub(nomEquip);
+	}
 
 }

@@ -14,4 +14,13 @@ public class Club {
 	public String getNomClub() {
 		return nomClub;
 	}
+
+	public void setNomClub(String nomClub) {
+		this.nomClub = nomClub;
+	}
+
+	public String toString() {
+		return "nomClub";
+	}
+
 }
