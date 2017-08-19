@@ -1,5 +1,7 @@
 package Persistencia;
 
+import java.util.List;
+
 import Domini.Jugador;
 
 public class FacanaBBDD {
@@ -52,8 +54,15 @@ public class FacanaBBDD {
 	}
 
 	public String[] recuperarClubs() throws Exception {
-		return clubBBDD.recuperarClubs();
+
+		List<String> clubsRecuperats = clubBBDD.recuperarClubs();
+		String[] clubs = new String[clubsRecuperats.size()];
+		int contador = 0;
+		for (String string : clubsRecuperats) {
+			clubs[contador] = string;
+			contador++;
+		}
+		return clubs;
 	}
 
-	
 }

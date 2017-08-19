@@ -3,6 +3,8 @@ package Persistencia;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import Domini.Club;
 
@@ -55,18 +57,18 @@ class ClubBBDD {
 
 	}
 
-	public String[] recuperarClubs() throws Exception {
-		String[] clubs = new String[50];
+	public List<String> recuperarClubs() throws Exception {
+		List<String> clubs = new ArrayList<String>();
 		PreparedStatement pst = null;
 		try {
 			String sql = "SELECT * FROM CLUB";
 			pst = ConnectionBBDD.getInstacia().prepareStatement(sql);
 			pst.clearParameters();
 			ResultSet rs = pst.executeQuery();
-			int contador = 0;
+	
 			while (rs.next()) {
-				clubs[contador] = rs.getString(1);
-				contador++;
+				clubs.add(rs.getString(1));
+	
 			}
 			return clubs;
 		} catch (SQLException e) {
