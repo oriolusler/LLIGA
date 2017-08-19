@@ -85,6 +85,10 @@ public class AfegirJugador {
 			FCONGNOM2.setColumns(10);
 
 			JButton btnNewButton = new JButton("Torner pantalla anterior");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+				}
+			});
 
 			afegir.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {

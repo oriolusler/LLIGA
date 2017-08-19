@@ -7,6 +7,11 @@ import javax.swing.JTable;
 import Aplicacio.ControlBBDD;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class pantallaClub {
 
@@ -34,25 +39,14 @@ public class pantallaClub {
 	 */
 	private void initialize(String string, ControlBBDD controlBBDD) {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 594, 408);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout
-				.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGap(0, 434, Short.MAX_VALUE));
-		groupLayout
-				.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGap(0, 261, Short.MAX_VALUE));
-		frame.getContentPane().setLayout(groupLayout);
 
 		String[] columnNames = { "Nom", "Cognom", "2n Cognom", "Equip", "Posicio", "T. Grogues", "T. Vermelles",
 				"Partits jugats" };
 
 		try {
 			String[] jugadors = controlBBDD.getJugadorsDeEquip(string);
-			for (int i = 0; i < jugadors.length; i++) {
-				System.out.println(jugadors[i]);
-			}
-			int i = jugadors.length;
-
 			Object[][] data = new Object[jugadors.length][columnNames.length];
 
 			for (int i1 = 0; i1 < jugadors.length; i1++) {
@@ -73,16 +67,42 @@ public class pantallaClub {
 			final JTable table = new JTable(data, columnNames);
 			table.setPreferredScrollableViewportSize(new Dimension(500, 70));
 			table.setFillsViewportHeight(true);
-			// Create the scroll pane and add the table to it.
+
 			JScrollPane scrollPane = new JScrollPane(table);
 
+			JButton btnTornarPantallaAnterior = new JButton("Tornar pantalla anterior");
+			btnTornarPantallaAnterior.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					frame.dispose();
+					new ConsultarEquip(controlBBDD);
+				}
+			});
+			GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+			groupLayout
+					.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addGroup(groupLayout.createSequentialGroup().addGap(33)
+									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 511,
+											GroupLayout.PREFERRED_SIZE)
+									.addContainerGap(34, Short.MAX_VALUE))
+							.addGroup(Alignment.TRAILING,
+									groupLayout.createSequentialGroup().addContainerGap(230, Short.MAX_VALUE)
+											.addComponent(btnTornarPantallaAnterior).addGap(201)));
+			groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 295, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+							.addComponent(btnTornarPantallaAnterior).addContainerGap()));
+			frame.getContentPane().setLayout(groupLayout);
+
+			// Create the scroll pane and add the table to it.
+			// JScrollPane scrollPane = new JScrollPane(table);
+
 			// Add the scroll pane to this panel.
-			frame.setContentPane(scrollPane);
+			// frame.setContentPane(scrollPane);
 			frame.setVisible(true);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
 }
