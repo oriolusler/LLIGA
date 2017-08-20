@@ -1,19 +1,22 @@
-package PresentacioCLUB;
+package PresentacioJUGADOR;
 
 import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import Aplicacio.ControlBBDD;
-import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JPanel;
-import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
-public class pantallaClub {
+import Aplicacio.ControlBBDD;
+import PresentacioCLUB.ConsultarEquip;
+
+public class ResultatBuscarJugador {
 
 	private JFrame frame;
 
@@ -24,34 +27,36 @@ public class pantallaClub {
 	/**
 	 * Create the application.
 	 * 
-	 * @param string
+	 * @param controlBBDD
+	 * @param cognomJugador
+	 * @param nomJugador
 	 */
-	public pantallaClub(String string, ControlBBDD controlBBDD) {
-
-		initialize(string, controlBBDD);
+	public ResultatBuscarJugador(ControlBBDD controlBBDD, String nomJugador, String cognomJugador) {
+		initialize(controlBBDD, nomJugador, cognomJugador);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 * 
-	 * @param string
 	 * @param controlBBDD
+	 * @param cognomJugador
+	 * @param nomJugador
 	 */
-	private void initialize(String string, ControlBBDD controlBBDD) {
+	private void initialize(ControlBBDD controlBBDD, String nomJugador, String cognomJugador) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 594, 408);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		String[] columnNames = { "Nom", "Cognom", "2n Cognom", "Equip", "Posicio", "T. Grogues", "T. Vermelles",
-				"Partits jugats", "Gols" };
+				"Partits jugats" , "Gols"};
 
 		try {
-			String[] jugadors = controlBBDD.getJugadorsDeEquip(string);
-			Object[][] data = new Object[jugadors.length][columnNames.length];
+			String[] jugadorsTrobats = controlBBDD.getJugadorBuscat(nomJugador, cognomJugador);
+			Object[][] data = new Object[jugadorsTrobats.length][columnNames.length];
 
-			for (int i1 = 0; i1 < jugadors.length; i1++) {
+			for (int i1 = 0; i1 < jugadorsTrobats.length; i1++) {
 
-				String[] parts = jugadors[i1].split(",");
+				String[] parts = jugadorsTrobats[i1].split(",");
 
 				data[i1][0] = parts[0];
 				data[i1][1] = parts[1];
@@ -75,7 +80,7 @@ public class pantallaClub {
 			btnTornarPantallaAnterior.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					frame.dispose();
-					new ConsultarEquip(controlBBDD);
+					new BuscarJugador(controlBBDD);
 				}
 			});
 			GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -105,5 +110,7 @@ public class pantallaClub {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
+
 }

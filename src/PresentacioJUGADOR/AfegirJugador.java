@@ -87,6 +87,8 @@ public class AfegirJugador {
 			JButton btnNewButton = new JButton("Torner pantalla anterior");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					frame.dispose();
+					new ConsultarJugador(controlBBDD);
 				}
 			});
 
@@ -94,10 +96,9 @@ public class AfegirJugador {
 				public void actionPerformed(ActionEvent e) {
 
 					try {
-						 controlBBDD.afegirJugador(FNom.getText(), FCONGNOM1.getText(),
-						 FCONGNOM2.getText(),
-						 comboBoxEquips.getSelectedItem().toString(),
-						 comboBoxoscions.getSelectedItem().toString());
+						controlBBDD.afegirJugador(FNom.getText(), FCONGNOM1.getText(), FCONGNOM2.getText(),
+								comboBoxEquips.getSelectedItem().toString(),
+								comboBoxoscions.getSelectedItem().toString());
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

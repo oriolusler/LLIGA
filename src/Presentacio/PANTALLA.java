@@ -28,10 +28,10 @@ public class PANTALLA {
 	 * Launch the application.
 	 */
 
-
 	/**
 	 * Create the application.
-	 * @param controlBBDD 
+	 * 
+	 * @param controlBBDD
 	 */
 	public PANTALLA(ControlBBDD controlBBDD) {
 		initialize(controlBBDD);
@@ -45,9 +45,9 @@ public class PANTALLA {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 479, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JLabel label = new JLabel("");
-		
+
 		JButton butJUGADOR = new JButton("BUSCAR JUGADOR");
 		butJUGADOR.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -55,41 +55,38 @@ public class PANTALLA {
 				new ConsultarJugador(controlBBDD);
 			}
 		});
-		
+
 		JButton butCLUB = new JButton("BUSCAR CLUB");
-		
+
 		butCLUB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				frame.dispose();
 				new BuscarClub(controlBBDD);
 			}
 		});
+
+		JButton btnActualitzar = new JButton("ACTUALITZAR");
+		btnActualitzar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				new Actualitzacio(controlBBDD);
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(60)
-							.addComponent(label))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(121)
-							.addComponent(butCLUB, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(butJUGADOR)))
-					.addContainerGap(112, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(97)
-					.addComponent(label)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(butJUGADOR)
-						.addComponent(butCLUB))
-					.addContainerGap(130, Short.MAX_VALUE))
-		);
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+				.createSequentialGroup()
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup().addGap(60).addComponent(label))
+						.addGroup(groupLayout.createSequentialGroup().addGap(35)
+								.addComponent(butCLUB, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+								.addGap(18).addComponent(butJUGADOR).addGap(18).addComponent(btnActualitzar)))
+				.addContainerGap(57, Short.MAX_VALUE)));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addGap(97).addComponent(label)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(butCLUB)
+								.addComponent(butJUGADOR).addComponent(btnActualitzar))
+						.addContainerGap(130, Short.MAX_VALUE)));
 		frame.getContentPane().setLayout(groupLayout);
 	}
 }

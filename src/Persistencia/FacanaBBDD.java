@@ -44,9 +44,6 @@ public class FacanaBBDD {
 	}
 
 	// JUGADOR
-	public Jugador getJugadorFromDB(Jugador jugador) throws Exception {
-		return jugadorBBDD.getJugadorFromDB(jugador);
-	}
 
 	public void afegirJugador(Jugador jugador) throws Exception {
 		jugadorBBDD.storeJugador(jugador);
@@ -64,9 +61,40 @@ public class FacanaBBDD {
 		}
 		return clubs;
 	}
-	
-	public List<Jugador> recuperarJugador(String nomEquip) throws Exception{
+
+	public List<Jugador> recuperarJugador(String nomEquip) throws Exception {
 		return jugadorBBDD.recuperarJugadorDeClub(nomEquip);
 	}
 
+	public List<Jugador> jugadorBuscat(String nom, String iCognom) throws Exception {
+		return jugadorBBDD.jugadorBuscat(nom, iCognom);
+	}
+
+	public List<Jugador> getJugadorsFromActulitzaio(String equip, String poiscio) throws Exception {
+		return jugadorBBDD.getJugadorsFromActulitzacion(equip, poiscio);
+	}
+
+	public void actuizatrPartitsJugats(String nom, String iCognom, String iIcognom) throws Exception {
+		System.out.println("HOLA!");
+		jugadorBBDD.actulitzarPartitsJugats(nom, iCognom, iIcognom);
+
+	}
+
+	public void actulitzarTgeogues(String nom, String iCognom, String iIcognom)throws Exception {
+		jugadorBBDD.actulitzarTgeogues(nom, iCognom, iIcognom);
+
+		
+	}
+
+	public void actulitzarTvarmelles(String nom, String iCognom, String iIcognom) throws Exception {
+		jugadorBBDD.actulitzarTvarmelles(nom, iCognom, iIcognom);
+
+		
+	}
+
+	public void actulitzarGols(String nom, String iCognom, String iIcognom)  throws Exception {
+		jugadorBBDD.actulitzarGols(nom, iCognom, iIcognom);
+
+		
+	}
 }

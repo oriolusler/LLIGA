@@ -5,13 +5,13 @@ public class Jugador {
 	String nom, cognom1, cognom2;
 	Club club;
 	Posicions posicio;
-	int grogues, vermelles, partitsJugats;
+	int grogues, vermelles, partitsJugats, gols;
 
 	public Jugador() {
 	}
 
 	public Jugador(String nom, String cognom1, String cognom2, String club, Posicions posicio, int grogues,
-			int vermelles, int partitsJugats) {
+			int vermelles, int partitsJugats, int gols) {
 		super();
 		this.nom = nom;
 		this.cognom1 = cognom1;
@@ -21,6 +21,7 @@ public class Jugador {
 		this.grogues = grogues;
 		this.vermelles = vermelles;
 		this.partitsJugats = partitsJugats;
+		this.gols = gols;
 	}
 
 	public String getNom() {
@@ -87,10 +88,18 @@ public class Jugador {
 		this.vermelles = vermelles;
 	}
 
+	public int getGols() {
+		return gols;
+	}
+
+	public void setGols(int gols) {
+		this.gols = gols;
+	}
+
 	@Override
 	public String toString() {
 		return nom + "," + cognom1 + "," + cognom2 + "," + club.getNomClub() + "," + posicio + "," + grogues + ","
-				+ vermelles + "," + partitsJugats;
+				+ vermelles + "," + partitsJugats + "," + gols;
 	}
 
 }

@@ -7,6 +7,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
 import Aplicacio.ControlBBDD;
+import Presentacio.PANTALLA;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -54,15 +55,24 @@ public class ConsultarJugador {
 				new AfegirJugador(controlBBDD);
 			}
 		});
+
+		JButton btnTornarPantallaAnterior = new JButton("Tornar pantalla anterior");
+		btnTornarPantallaAnterior.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.dispose();
+				new PANTALLA(controlBBDD);
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-						.addGap(56).addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnNewButton_1).addComponent(nuscarjugador))
-						.addContainerGap(273, Short.MAX_VALUE)));
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+				.createSequentialGroup().addGap(56)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(btnTornarPantallaAnterior)
+						.addComponent(btnNewButton_1).addComponent(nuscarjugador))
+				.addContainerGap(273, Short.MAX_VALUE)));
 		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup().addGap(82).addComponent(nuscarjugador).addGap(18)
-						.addComponent(btnNewButton_1).addContainerGap(115, Short.MAX_VALUE)));
+						.addComponent(btnNewButton_1).addGap(27).addComponent(btnTornarPantallaAnterior)
+						.addContainerGap(65, Short.MAX_VALUE)));
 		frame.getContentPane().setLayout(groupLayout);
 	}
 

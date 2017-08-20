@@ -13,6 +13,8 @@ public class ControlBBDD {
 	// private Club club;
 	// private Jugador jugador;
 
+	String[] equips;
+
 	public ControlBBDD() {
 		// jugador = new Jugador();
 		// club = new Club();
@@ -54,7 +56,7 @@ public class ControlBBDD {
 			break;
 
 		}
-		Jugador jugador = new Jugador(nom, cognom1, cognom2, club, a, 0, 0, 0);
+		Jugador jugador = new Jugador(nom, cognom1, cognom2, club, a, 0, 0, 0, 0);
 		FacanaBBDD.getInstance().afegirJugador(jugador);
 
 	}
@@ -70,6 +72,55 @@ public class ControlBBDD {
 		}
 
 		return jugadors;
+
+	}
+
+	public String[] getJugadorBuscat(String nom, String iCognom) throws Exception {
+		List<Jugador> jugadors = FacanaBBDD.getInstance().jugadorBuscat(nom, iCognom);
+		String[] jugadors1 = new String[jugadors.size()];
+
+		int contador = 0;
+		for (Jugador jug : jugadors) {
+			jugadors1[contador] = jug.toString();
+			contador++;
+		}
+
+		return jugadors1;
+
+	}
+
+	public String[] getJugadorsFromAcctualitzacio(String equip, String poiscio) throws Exception {
+
+		List<Jugador> jugadors = FacanaBBDD.getInstance().getJugadorsFromActulitzaio(equip, poiscio);
+		String[] jugadors1 = new String[jugadors.size()];
+
+		int contador = 0;
+		for (Jugador jug : jugadors) {
+			jugadors1[contador] = jug.toString();
+			contador++;
+		}
+
+		return jugadors1;
+	}
+
+	public void actulitzarPartitsJugats(String nom, String ICognom, String IIcognom) throws Exception {
+		System.out.println("HOLA!");
+		FacanaBBDD.getInstance().actuizatrPartitsJugats(nom, ICognom, IIcognom);
+
+	}
+
+	public void actulitzarTgeogues(String nom, String ICognom, String IIcognom) throws Exception {
+		FacanaBBDD.getInstance().actulitzarTgeogues(nom, ICognom, IIcognom);
+
+	}
+
+	public void actulitzarTvarmelles(String nom, String ICognom, String IIcognom) throws Exception {
+		FacanaBBDD.getInstance().actulitzarTvarmelles(nom, ICognom, IIcognom);
+
+	}
+
+	public void actulitzarGols(String nom, String ICognom, String IIcognom) throws Exception {
+		FacanaBBDD.getInstance().actulitzarGols(nom, ICognom, IIcognom);
 
 	}
 
