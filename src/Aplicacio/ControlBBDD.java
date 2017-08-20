@@ -104,7 +104,7 @@ public class ControlBBDD {
 	}
 
 	public void actulitzarPartitsJugats(String nom, String ICognom, String IIcognom) throws Exception {
-		System.out.println("HOLA!");
+	
 		FacanaBBDD.getInstance().actuizatrPartitsJugats(nom, ICognom, IIcognom);
 
 	}

@@ -26,6 +26,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class Actualitzacio {
 
@@ -51,7 +53,8 @@ public class Actualitzacio {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 513, 402);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		JPanel panelACTUAL = new JPanel();
+		
 		JLabel lblEquip = new JLabel("Equip");
 		lblEquip.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
@@ -76,6 +79,7 @@ public class Actualitzacio {
 			lblJugador.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 			JComboBox comboBoxJugador = new JComboBox();
+			
 			comboBoxJugador.addFocusListener(new FocusAdapter() {
 				@Override
 				public void focusGained(FocusEvent arg0) {
@@ -109,8 +113,6 @@ public class Actualitzacio {
 				}
 			});
 
-			JPanel panel = new JPanel();
-
 			GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 			groupLayout
 					.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -125,7 +127,8 @@ public class Actualitzacio {
 											.addComponent(comboBoxEquips, 0, 160, Short.MAX_VALUE))
 									.addContainerGap(191, Short.MAX_VALUE))
 							.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-									.addComponent(panel, GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE).addGap(25)));
+									.addComponent(panelACTUAL, GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+									.addGap(25)));
 			groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
 					.createSequentialGroup().addGap(52)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -141,7 +144,7 @@ public class Actualitzacio {
 							comboBoxJugador, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 							GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panelACTUAL, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(39, Short.MAX_VALUE)));
 
 			JButton btnPartitJugat = new JButton("PARTIT JUGAT");
@@ -150,7 +153,7 @@ public class Actualitzacio {
 
 					String jugador = comboBoxJugador.getSelectedItem().toString();
 					String[] parts = jugador.split(" ");
-					System.out.println("HOLA!");
+
 					try {
 						controlBBDD.actulitzarPartitsJugats(parts[0], parts[1], parts[2]);
 					} catch (Exception e1) {
@@ -169,7 +172,6 @@ public class Actualitzacio {
 				public void actionPerformed(ActionEvent e) {
 					String jugador = comboBoxJugador.getSelectedItem().toString();
 					String[] parts = jugador.split(" ");
-					System.out.println("HOLA!");
 					try {
 						controlBBDD.actulitzarTgeogues(parts[0], parts[1], parts[2]);
 					} catch (Exception e1) {
@@ -216,30 +218,36 @@ public class Actualitzacio {
 			JLabel lblPerExempleUn = new JLabel(
 					"Per exemple, un click a \"T. GROGA\", s'afagir\u00E0 un targeta a la base de dades.");
 			lblPerExempleUn.setFont(new Font("Tahoma", Font.PLAIN, 12));
-			GroupLayout gl_panel = new GroupLayout(panel);
-			gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-					.addGroup(gl_panel.createSequentialGroup().addGap(70)
+			GroupLayout gl_panelACTUAL = new GroupLayout(panelACTUAL);
+			gl_panelACTUAL.setHorizontalGroup(gl_panelACTUAL.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panelACTUAL.createSequentialGroup().addGap(70)
 							.addComponent(lblPerActulitzarSha, GroupLayout.PREFERRED_SIZE, 331,
 									GroupLayout.PREFERRED_SIZE)
 							.addContainerGap(573, Short.MAX_VALUE))
-					.addGroup(gl_panel.createSequentialGroup().addGap(34).addGroup(gl_panel
+					.addGroup(gl_panelACTUAL.createSequentialGroup().addGap(34).addGroup(gl_panelACTUAL
 							.createParallelGroup(Alignment.LEADING)
-							.addGroup(gl_panel.createSequentialGroup().addComponent(lblPerExempleUn).addContainerGap())
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panelACTUAL.createSequentialGroup().addComponent(lblPerExempleUn)
+									.addContainerGap())
+							.addGroup(gl_panelACTUAL.createParallelGroup(Alignment.LEADING)
 									.addGroup(Alignment.TRAILING,
-											gl_panel.createSequentialGroup().addComponent(lblActuliztar).addGap(155))
-									.addGroup(gl_panel.createSequentialGroup().addComponent(btnPartitJugat).addGap(18)
-											.addComponent(btnTGroga).addGap(18).addComponent(btnTvarmella).addGap(18)
-											.addComponent(btnGol).addContainerGap(556, Short.MAX_VALUE))))));
-			gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
-					.createSequentialGroup().addContainerGap().addComponent(lblActuliztar)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblPerActulitzarSha, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblPerExempleUn).addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(btnPartitJugat)
-							.addComponent(btnTGroga).addComponent(btnTvarmella).addComponent(btnGol))
-					.addContainerGap(43, Short.MAX_VALUE)));
-			panel.setLayout(gl_panel);
+											gl_panelACTUAL.createSequentialGroup().addComponent(lblActuliztar)
+													.addGap(155))
+									.addGroup(gl_panelACTUAL.createSequentialGroup().addComponent(btnPartitJugat)
+											.addGap(18).addComponent(btnTGroga).addGap(18).addComponent(btnTvarmella)
+											.addGap(18).addComponent(btnGol).addContainerGap(556, Short.MAX_VALUE))))));
+			gl_panelACTUAL
+					.setVerticalGroup(gl_panelACTUAL.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panelACTUAL.createSequentialGroup().addContainerGap()
+									.addComponent(lblActuliztar).addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblPerActulitzarSha, GroupLayout.PREFERRED_SIZE, 32,
+											GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblPerExempleUn)
+									.addGap(18)
+									.addGroup(gl_panelACTUAL.createParallelGroup(Alignment.BASELINE)
+											.addComponent(btnPartitJugat).addComponent(btnTGroga)
+											.addComponent(btnTvarmella).addComponent(btnGol))
+									.addContainerGap(43, Short.MAX_VALUE)));
+			panelACTUAL.setLayout(gl_panelACTUAL);
 			frame.getContentPane().setLayout(groupLayout);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -243,7 +243,7 @@ class JugadorBBDD {
 			if (pst != null)
 				pst.close();
 			ConnectionBBDD.getInstacia().close();
-			System.out.println("OKEI");
+
 		}
 		
 		

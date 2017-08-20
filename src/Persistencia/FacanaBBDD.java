@@ -75,7 +75,7 @@ public class FacanaBBDD {
 	}
 
 	public void actuizatrPartitsJugats(String nom, String iCognom, String iIcognom) throws Exception {
-		System.out.println("HOLA!");
+	
 		jugadorBBDD.actulitzarPartitsJugats(nom, iCognom, iIcognom);
 
 	}
