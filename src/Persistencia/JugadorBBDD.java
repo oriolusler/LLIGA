@@ -26,6 +26,7 @@ class JugadorBBDD {
 			pst.setInt(6, jugador.getGrogues());
 			pst.setInt(7, jugador.getVermelles());
 			pst.setInt(8, jugador.getPartitsJugats());
+			pst.setInt(9, jugador.getGols());
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			throw new Exception("ERROR de SQL/JUGADORBBDD/storeJugador\n" + e.getMessage());
@@ -245,8 +246,6 @@ class JugadorBBDD {
 			ConnectionBBDD.getInstacia().close();
 
 		}
-		
-		
 
 	}
 
